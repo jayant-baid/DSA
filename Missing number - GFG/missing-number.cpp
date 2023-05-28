@@ -27,10 +27,14 @@ int missingNumber(int nums[], int n)
 {
     // Your code goes here
     // int n=nums.size();
-        int sum=n*(n+1)/2;
-
+        // int sum=n*(n+1)/2;
+        
+        int ans=0;
+        
         for(int i=0;i<n-1;i++){
-            sum-=nums[i];
+            // sum-=nums[i];
+            ans=ans^(i+1);
+            ans=ans^nums[i];
         }
-        return sum;
+        return ans^n;
 }
