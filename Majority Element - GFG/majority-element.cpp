@@ -21,9 +21,9 @@ class Solution{
         }
         int ans=-1;
         
-        for(int i=0;i<n;i++){
-            if(mpp[arr[i]] > n/2){
-                ans=arr[i];
+        for(auto it: mpp){
+            if(it.second > n/2){
+                ans=it.first;
             }
         }
         return ans;
