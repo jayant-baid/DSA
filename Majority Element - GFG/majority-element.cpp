@@ -19,14 +19,13 @@ class Solution{
         for(int i=0;i<n;i++){
             mpp[arr[i]]++;
         }
-        int ans=-1;
         
         for(auto it: mpp){
             if(it.second > n/2){
-                ans=it.first;
+                return it.first;
             }
         }
-        return ans;
+        return -1;
         
     }
 };
