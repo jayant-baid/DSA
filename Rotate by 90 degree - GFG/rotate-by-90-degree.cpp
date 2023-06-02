@@ -16,7 +16,12 @@ class Solution
                 swap(matrix[i][j], matrix[j][i]);
             }
         }
-        reverse(matrix.begin(), matrix.end());
+        // reverse(matrix.begin(), matrix.end());
+        for(int j=0;j<n;j++){
+            int s=0, e=n-1;
+            while(s<e)
+                swap(matrix[s++][j], matrix[e--][j]);
+        }
     } 
 };
 
