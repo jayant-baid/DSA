@@ -21,8 +21,6 @@ public:
 	            index=i;
 	        }
 	    }
-	    if(index == n)
-	        return -1;
 	    return index;
 	}
 
