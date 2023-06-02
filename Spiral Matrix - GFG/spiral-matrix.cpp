@@ -11,7 +11,7 @@ class Solution{
         // Your code goes here
         vector<int> ans;
         int srow=0, scol=0, erow=n-1, ecol=m-1;
-        int cnt=0, total=n*m;
+        int cnt=0, total=k;
         while(cnt<total){
             for(int i=scol;cnt<total && i<=ecol;i++){
                 ans.push_back(matrix[srow][i]);
