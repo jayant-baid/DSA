@@ -9,10 +9,10 @@ class Solution{
     // arr[]: Input Array
     // N : Size of the Array arr[]
     // Function to count inversions in the array.
-    long long int cnt=0;
-    void merge(long long arr[], long long s, long long mid, long long e){
+    long long int merge(long long arr[], long long s, long long mid, long long e){
         vector<long long> temp;
         long long left=s, right=mid+1;
+        long long int cnt=0;
         while(left <= mid && right <= e){
             if(arr[left] <= arr[right]){
                 temp.push_back(arr[left]);
@@ -35,21 +35,25 @@ class Solution{
         
         for(int i=s;i<=e;i++)
             arr[i]=temp[i-s];
+        
+        return cnt;
     }
     
-    void mergeSort(long long arr[],long long s, long long e){
+    long long int mergeSort(long long arr[],long long s, long long e){
+        long long int cnt=0;
         if(s>= e)
-            return;
+            return cnt;
             
         long long mid=s+(e-s)/2;
-        mergeSort(arr, s,mid);
-        mergeSort(arr, mid+1, e);
-        merge(arr, s, mid, e);
+        cnt+=mergeSort(arr, s,mid);
+       cnt+= mergeSort(arr, mid+1, e);
+        cnt+=merge(arr, s, mid, e);
+        return cnt;
+        
     }
     long long int inversionCount(long long arr[], long long n)
     {
-        mergeSort(arr, 0, n-1);
-        return cnt;
+        return mergeSort(arr, 0, n-1);
     }
 
 };
