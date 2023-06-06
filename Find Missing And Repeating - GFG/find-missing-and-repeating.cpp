@@ -7,22 +7,35 @@ using namespace std;
 class Solution{
 public:
     vector<int> findTwoElement(vector<int> arr, int n) {
-        // code here
-        int hash[n+1]={0};
-        for(int i=0;i<n;i++)
-            hash[arr[i]]++;
-        
-        int missing=-1, repeated=-1;
-        for(int i=1;i<=n;i++){
-            if(hash[i] == 2)
-                repeated=i;
-            else if(hash[i] == 0)
-                missing=i;
-                
-            if(missing != -1 && repeated != -1)
-                break;
+    
+        int xr=0;
+        for(int i=0;i<n;i++){
+            xr=xr^arr[i];
+            xr=xr^(i+1);
         }
-        return {repeated, missing};
+        
+        int number=(xr & ~(xr-1));
+        int zero=0, one=0;
+        for(int i=0;i<n;i++){
+            if((arr[i] & number) != 0)
+                one=one^arr[i];
+            else
+                zero=zero^arr[i];
+        }
+        
+        for(int i=1;i<=n;i++){
+            if((i & number) != 0)
+                one=one^i;
+            else
+                zero=zero^i;
+        }
+        
+        for(int i=0;i<n;i++){
+            if(arr[i] == zero)
+                return {zero, one};
+            else if(arr[i] == one)
+                return {one, zero};
+        }
     }
 };
 
