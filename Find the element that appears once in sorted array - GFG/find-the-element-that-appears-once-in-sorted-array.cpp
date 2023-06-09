@@ -19,7 +19,7 @@ class Solution
         if(arr[n-2] != arr[n-1])
             return arr[n-1];
             
-        int s=0, e=n-1;
+        int s=1, e=n-2;
         while(s<=e){
             int mid=s+(e-s)/2;
             
