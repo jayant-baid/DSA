@@ -13,12 +13,12 @@ class Solution {
             if(arr[mid] == target)
                 return true;
             
-            if(arr[s] == arr[mid] && arr[mid] == arr[e]){
+            else if(arr[s] == arr[mid] && arr[mid] == arr[e]){
                 s++, e--;
                 continue;
             }
             
-            if(arr[s] <= arr[mid]){
+            else if(arr[s] <= arr[mid]){
                 if(arr[s] <= target && target <= arr[mid])
                     e=mid-1;
                 else
