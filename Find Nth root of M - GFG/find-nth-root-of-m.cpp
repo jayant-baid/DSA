@@ -5,33 +5,16 @@ using namespace std;
 // } Driver Code Ends
 class Solution{
 	public:
-	// return 1 if == m
-    // return 0 if < m
-    // return 2 if > m
-    
-    int func(int mid, int n, int m){
-      long long ans=1;
-      for(int i=1;i<=n;i++){
-        ans*=mid;
-        if(ans>m)
-          return 2;
-      }
-      if(ans==m)
-        return 1;
-      return 0;
-    }
-    
     int NthRoot(int n, int m) {
       int s=1, e=m;
     
       while(s<=e){
-        int mid=s+(e-s)/2;
-        int midN=func(mid, n, m);
+        long long mid=s+(e-s)/2;
     
-        if(midN == 1)
+        if(mid == m/pow(mid,n-1))
           return mid;
         
-        else if(midN == 0)
+        else if(mid < m/pow(mid,n-1))
           s=mid+1;
     
         else 
