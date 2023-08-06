@@ -13,6 +13,8 @@ class Solution
 	        }
 	        for(int i=index;i<s.length();i++){
 	            swap(s[index], s[i]);
+	            if(ans.find(s) != ans.end())
+	                continue;
 	            solve(s, index+1, ans);
 	            swap(s[index], s[i]);
 	        }
