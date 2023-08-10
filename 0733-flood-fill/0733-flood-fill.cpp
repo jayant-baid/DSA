@@ -1,7 +1,7 @@
 class Solution {
 public:
     void solve(vector<vector<int>>& image, int oldcolor, int newcolor, int i, int j){
-        if(i<0 || j<0 || i==image.size() || j==image[0].size() || image[i][j] != oldcolor)
+        if(i<0 || j<0 || i==image.size() || j==image[0].size() || image[i][j] != oldcolor || image[i][j] == newcolor)
             return;
         
         image[i][j]=newcolor;
