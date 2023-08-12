@@ -87,7 +87,9 @@ struct Node
 Node* deleteNode(Node *head,int x)
 {
     if(x == 1){
+        Node* temp=head;
         head=head->next;
+        delete temp;
         return head;
     }
     
@@ -101,6 +103,9 @@ Node* deleteNode(Node *head,int x)
     }
     
     prev->next=curr->next;
+    curr->next=NULL;
+    delete curr;
+    
     return head;
     
 }
