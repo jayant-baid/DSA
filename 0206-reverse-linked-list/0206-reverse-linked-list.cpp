@@ -17,9 +17,9 @@ public:
         }
         
         ListNode* forward=curr->next;
-        
-        solve(head, forward, curr);
         curr->next=prev;
+        solve(head, forward, curr);
+       
     }
     ListNode* reverseList(ListNode* head) {
         if(head == NULL || head->next == NULL)
