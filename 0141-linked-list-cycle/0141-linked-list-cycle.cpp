@@ -12,13 +12,14 @@ public:
         if(head==NULL || head->next == NULL)
             return false;
         
-        map<ListNode *, bool> mpp;
-        ListNode * temp=head;
-        while(temp){
-            if(mpp[temp] == true)
+        ListNode *slow=head, *fast=head;
+        while(fast && fast->next){
+            
+            slow=slow->next;
+            fast=fast->next->next;
+            
+            if(slow == fast)
                 return true;
-            mpp[temp]=true;
-            temp=temp->next;
         }
         return false;
             
