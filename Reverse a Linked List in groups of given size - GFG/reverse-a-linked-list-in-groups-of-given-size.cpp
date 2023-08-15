@@ -54,21 +54,38 @@ class Solution
         if(head==NULL)
             return NULL;
             
+        struct node* dummy=new struct node(0);
+        dummy->next=head;
+        
         struct node* curr=head;
-        struct node* prev=NULL;
+        struct node* prev=dummy;
+        struct node* next=dummy;
+        
         int cnt=0;
-        while(cnt < k && curr!=NULL){
-            struct node* next=curr->next;
-            curr->next=prev;
-            prev=curr;
-            curr=next;
+
+        while (curr!=NULL) {
+            curr = curr->next;
             cnt++;
         }
         
-        if(curr!=NULL){
-            head->next=reverse(curr, k);
+        while(next!=NULL){
+            curr=prev->next;
+            next=curr->next;
+            
+            int toloop=cnt>k ? k : cnt;
+            for(int i=1;i<toloop;i++){
+                curr->next=next->next;
+                next->next=prev->next;
+                prev->next=next;
+                next=curr->next;
+            }
+            
+            prev=curr;
+            cnt-=k;
+
         }
-        return prev;
+        
+        return dummy->next;
     }
 };
 
