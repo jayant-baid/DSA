@@ -33,38 +33,47 @@ class Solution
 {
     public:
     //Function to sort a linked list of 0s, 1s and 2s.
+    void insertAtTail(Node* &tail, Node* curr){
+        tail->next=curr;
+        tail=curr;
+    }
     Node* segregate(Node *head) {
         
-        int cnt0=0, cnt1=0, cnt2=0;
-        Node* temp=head;
         
-        while(temp){
-            if(temp->data == 0)
-                cnt0++;
-            else if(temp->data == 1)
-                cnt1++;
-            else
-                cnt2++;
-                
-            temp=temp->next;
-        }
+        Node* zerohead=new Node(-1);
+        Node* zerotail=zerohead;
+        Node* onehead=new Node(-1);
+        Node* onetail=onehead;
+        Node* twohead=new Node(-1);
+        Node* twotail=twohead;
         
-        temp=head;
-        while(temp){
-            if(cnt0){
-                temp->data=0;
-                cnt0--;
+        Node* curr=head;
+        
+        while(curr){
+            if(curr->data==0){
+                insertAtTail(zerotail, curr);
             }
-            else if(cnt1){
-                temp->data=1;
-                cnt1--;
+            else if(curr->data==1){
+                insertAtTail(onetail, curr);
             }
             else{
-                temp->data=2;
-                cnt2--;
+                insertAtTail(twotail, curr);
             }
-            temp=temp->next;
+            curr=curr->next;
         }
+        
+        // 0 ka connection
+        if(onehead->next)
+            zerotail->next=onehead->next;
+        else
+            zerotail->next=twohead->next;
+            
+        onetail->next=twohead->next;
+        twotail->next=NULL;
+        
+        head=zerohead->next;
+        
+        // return zerohead->next;
         return head;
     }
 };
