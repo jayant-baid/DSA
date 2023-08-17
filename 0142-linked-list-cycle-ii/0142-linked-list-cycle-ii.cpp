@@ -30,13 +30,10 @@ public:
         if(intersection == NULL)
             return NULL;
         
-        while(slow!=NULL){
-            if(slow == intersection)
-                return slow;
+        while(slow!=intersection){
             slow=slow->next;
             intersection=intersection->next;
-            
         }
-        return NULL;
+        return slow;
     }
 };
