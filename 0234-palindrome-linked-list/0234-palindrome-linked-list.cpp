@@ -10,42 +10,64 @@
  */
 class Solution {
 public:
-    bool checkPalin(ListNode* head1, ListNode* head2){
-        while(head2){
-            if(head1->val != head2->val)
-                return false;
-            head1=head1->next;
-            head2=head2->next;
-        }
-        return true;
-    }
-    ListNode* reverse(ListNode* head){
-        ListNode* curr=head;
-        ListNode* prev=NULL;
-        while(curr){
-            ListNode* next=curr->next;
-            curr->next=prev;
-            prev=curr;
-            curr=next;
-        }
-        return prev;
-    }
-    ListNode* getmiddle(ListNode* head){
-        ListNode* slow=head;
-        ListNode* fast=head->next;
-        while(fast && fast->next){
-            slow=slow->next;
-            fast=fast->next->next;
-        }
-        return slow;
-    }
+    // bool checkPalin(ListNode* head1, ListNode* head2){
+    //     while(head2){
+    //         if(head1->val != head2->val)
+    //             return false;
+    //         head1=head1->next;
+    //         head2=head2->next;
+    //     }
+    //     return true;
+    // }
+    // ListNode* reverse(ListNode* head){
+    //     ListNode* curr=head;
+    //     ListNode* prev=NULL;
+    //     while(curr){
+    //         ListNode* next=curr->next;
+    //         curr->next=prev;
+    //         prev=curr;
+    //         curr=next;
+    //     }
+    //     return prev;
+    // }
+    // ListNode* getmiddle(ListNode* head){
+    //     ListNode* slow=head;
+    //     ListNode* fast=head->next;
+    //     while(fast && fast->next){
+    //         slow=slow->next;
+    //         fast=fast->next->next;
+    //     }
+    //     return slow;
+    // }
     bool isPalindrome(ListNode* head) {
+//         if(head == NULL || head->next==NULL)
+//             return true;
+        
+//         ListNode* middle=getmiddle(head);
+//         middle->next=reverse(middle->next);
+        
+//         return checkPalin(head, middle->next);
         if(head == NULL || head->next==NULL)
             return true;
-        
-        ListNode* middle=getmiddle(head);
-        middle->next=reverse(middle->next);
-        
-        return checkPalin(head, middle->next);
+         
+        ListNode* slow=head;
+        ListNode* fast=head;
+        ListNode* prev=NULL;
+        while(fast && fast->next){
+            fast=fast->next->next;
+            
+            ListNode* next=slow->next;
+            slow->next=prev;
+            prev=slow;
+            slow=next;
+        }
+        slow=fast ? slow->next : slow;
+        while(slow){
+            if(prev->val != slow->val)
+                return false;
+            prev=prev->next;
+            slow=slow->next;
+        }
+        return true;
     }
 };
