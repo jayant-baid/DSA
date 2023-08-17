@@ -14,31 +14,17 @@ public:
         if(head==NULL || head->next == NULL)
             return head;
         
-        ListNode* oddhead=new ListNode(-1);
-        ListNode* oddtail=oddhead;
+        ListNode* odd=head;
+        ListNode* even=head->next;
+        ListNode* evenHead=even;
         
-        ListNode* evenhead=new ListNode(-1);
-        ListNode* eventail=evenhead;
-        bool oddflag=true;
-        
-        ListNode* curr=head;
-        while(curr){
-            if(oddflag){
-                oddtail->next=curr;
-                oddtail=curr;
-            }
-            else{
-                eventail->next=curr;
-                eventail=curr;
-            }
-            oddflag=!oddflag;
-            curr=curr->next;
+        while(odd->next && even->next){
+            odd->next=even->next;
+            odd=odd->next;
+            even->next=odd->next;
+            even=even->next;
         }
-        if(oddhead->next ==NULL)
-            return evenhead->next;
-        oddtail->next=evenhead->next;
-        eventail->next=NULL;
-        head=oddhead->next;
+        odd->next=evenHead;
         return head;
     }
 };
