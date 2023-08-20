@@ -32,25 +32,14 @@ class Solution
         
         while(temp){
             Node* node=new Node(temp->data);
-            clone->next=node;
-            clone=node;
-            temp=temp->next;
-        }
-        
-        temp=head;
-        clone=dummy->next;
-        while(temp){
             Node* next=temp->next;
-            temp->next=clone;
+            temp->next=node;
+            node->next=next;
             temp=next;
-            
-            next=clone->next;
-            clone->next=temp;
-            clone=next;
         }
         
         temp=head;
-        clone=dummy->next;
+        clone=temp->next;
         
         while(temp){
             if(temp->arb)
@@ -59,7 +48,8 @@ class Solution
             temp=temp->next->next;
         }
         temp=head;
-        clone=dummy->next;
+        clone=temp->next;
+        Node* ans=clone;
         
         while(temp){
             temp->next=temp->next->next;
@@ -68,7 +58,7 @@ class Solution
                 clone->next=temp->next;
             clone=clone->next;
         }
-        return dummy->next;
+        return ans;
     }
 
 };
