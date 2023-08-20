@@ -62,7 +62,7 @@ class Solution
         clone=dummy->next;
         
         while(temp){
-            temp->next=clone->next;
+            temp->next=temp->next->next;
             temp=temp->next;
             if(temp)
                 clone->next=temp->next;
