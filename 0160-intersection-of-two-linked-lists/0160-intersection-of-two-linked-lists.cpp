@@ -12,9 +12,7 @@ public:
         ListNode* d1=first;
         ListNode* d2=second;
         
-        while(d1 && d2){
-            if(d1 == d2)
-                return d1;
+        while(d1 != d2){
             
             d1=d1->next;
             d2=d2->next;
@@ -23,6 +21,6 @@ public:
             if(d2==NULL && d1!=NULL)
                 d2=first;
         }
-        return NULL;
+        return d1;
     }
 };
