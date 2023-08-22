@@ -21,13 +21,13 @@ public:
             head=head->next;
             return head;
         }
-        ListNode* prev=NULL;
-        while(fast){
-            prev=slow;
+        // ListNode* prev=NULL;
+        while(fast->next){
+
             slow=slow->next;
             fast=fast->next;
         }
-        prev->next=slow->next;
+        slow->next=slow->next->next;
         return head;
             
     }
