@@ -22,27 +22,16 @@ int countRev (string s)
     if(s.size() & 1)
         return -1;
         
-    stack<char> st;
-    
-    for(int i=0;i<s.size();i++){
-        if(s[i] == '{')
-            st.push(s[i]);
-        else{
-            if(!st.empty() && st.top() == '{')
-                st.pop();
-            else
-                st.push(s[i]);
-        }
-    }
+    while(s.length()!=0 && s.find("{}") < s.length())
+        s.erase(s.find("{}"), 2);
+        
     
     int a=0, b=0;
-    while(!st.empty()){
-        if(st.top() == '{')
+    for(int i=0;i<s.length();i++){
+        if(s[i] == '{')
             a++;
         else
             b++;
-            
-        st.pop();
     }
     return (a+1)/2 + (b+1)/2;
 }
