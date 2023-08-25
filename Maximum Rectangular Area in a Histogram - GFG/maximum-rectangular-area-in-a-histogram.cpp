@@ -13,7 +13,7 @@ class Solution
         stack<long long> s;
         long long area=0;
         for(int i=0;i<=n;i++){
-            while(!s.empty() && (i==n || arr[s.top()] >arr[i])){
+            while(!s.empty() && (i==n || arr[s.top()] >=arr[i])){
                 long long length=arr[s.top()];
                 s.pop();
                 long long width;
