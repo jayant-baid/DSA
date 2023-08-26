@@ -17,8 +17,8 @@ public:
         if(cnt == size)
             return false;
         
-        arr[rear%size]=value;
-        rear++;
+        arr[rear]=value;
+        rear=(rear+1)%size;
         cnt++;
         return true;
         
@@ -28,8 +28,8 @@ public:
         if(cnt==0)
             return false;
         
-        arr[front%size]=-1;
-        front++;
+        // arr[front]=-1;
+        front=(front+1)%size;
         cnt--;
         return true;
     }
@@ -37,16 +37,15 @@ public:
     int Front() {
         if(cnt==0)
             return -1;
-        return arr[front%size];
+        return arr[front];
     }
     
     int Rear() {
         if(cnt==0)
             return -1;
-        rear--;
-        int ans=arr[rear%size];
-        rear++;
-        return ans;
+        if(rear==0)
+            return arr[size-1];
+        return arr[rear-1];
     }
     
     bool isEmpty() {
