@@ -32,10 +32,10 @@ public:
             node* res=mpp[key];
             int ans=res->value;
             
-            mpp.erase(key);
+            // mpp.erase(key);
             deletenode(res);
             addnode(res);
-            mpp[key]=head->next;
+            // mpp[key]=head->next;
             
             return ans; 
         }
