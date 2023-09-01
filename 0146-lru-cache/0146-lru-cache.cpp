@@ -45,7 +45,7 @@ public:
     void put(int key, int value) {
         if(mpp.find(key)!=mpp.end()){
             node* existingnode=mpp[key];
-            mpp.erase(key);
+            // mpp.erase(key);
             deletenode(existingnode);
         }
         else if(mpp.size() == cap){
