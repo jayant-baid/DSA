@@ -48,8 +48,8 @@ public:
 
 class LFUCache {
 public:
-    map<int, List*> freqlistmap;
-    map<int, Node*> keynode;
+    unordered_map<int, List*> freqlistmap;
+    unordered_map<int, Node*> keynode;
     int currsize;
     int maxsize;
     int minfreq;
