@@ -1,21 +1,21 @@
 class Solution {
 public:
-    bool solve(vector<int> nums,vector<bool>& visited,int currsum,int idx,int subsetsum,int k){
+    bool solve(vector<int> nums,vector<bool>& visited,int sum,int index,int target,int k){
         if(k==1)return true;
-        if(currsum>subsetsum)return false;
-        if(currsum==subsetsum){
-            return solve(nums,visited,0,0,subsetsum,k-1);
-        }
-        for(int i=idx;i<nums.size();i++){
-            if(!visited[i]){
+        if(sum>target)return false;
+        if(index >= nums.size())
+            return false;
+        if(sum==target)
+            return solve(nums,visited,0,0,target,k-1);
+        
+        for(int i=index;i<nums.size();i++){
+            if(!visited[i] && sum+nums[i] <=target){
                 visited[i] = true;
 
-                if(solve(nums,visited,currsum+nums[i],i+1,subsetsum,k))
+                if(solve(nums,visited,sum+nums[i],i+1,target,k))
                     return true;
 
                 visited[i] = false;
-
-                if(currsum==0)  break;
             }
         }
         return false;
@@ -27,13 +27,13 @@ public:
         for(auto it : nums)
             sum += it;
        if (sum < k || sum % k) return false;
-        int subsetsum = sum/k;
+        int target = sum/k;
         vector<bool> v(n,false);
         sort(nums.begin(), nums.end(), greater<int>());
-        if(nums[0]>subsetsum)
+        if(nums[0]>target)
             return false;
 
-        return solve(nums,v,0,0,subsetsum,k);
+        return solve(nums,v,0,0,target,k);
     }
     
 };
