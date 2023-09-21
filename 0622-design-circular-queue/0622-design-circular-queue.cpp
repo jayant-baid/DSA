@@ -4,58 +4,64 @@ public:
     int front;
     int rear;
     int size;
-    int cnt;
+
     MyCircularQueue(int k) {
         size=k;
         arr=new int[size];
-        front=0;
-        rear=0;
-        cnt=0;
+        front=-1;
+        rear=-1;
     }
     
     bool enQueue(int value) {
-        if(cnt == size)
+        if((front == 0 && rear == size-1) || (rear == front-1) )
             return false;
+
+        if(front == -1)
+            front=rear=0;
+        else if(front!=0 && rear==size-1)
+            rear=0;        
+        else
+            rear++;
         
         arr[rear]=value;
-        rear=(rear+1)%size;
-        cnt++;
         return true;
-        
     }
     
     bool deQueue() {
-        if(cnt==0)
+        if(front==-1)
             return false;
-        
+        // int ans=arr[front];
         // arr[front]=-1;
-        front=(front+1)%size;
-        cnt--;
+        if(front == rear)
+            front=rear=-1;
+        else if(front == size-1)
+            front=0;
+        else
+            front++;
+
         return true;
     }
     
     int Front() {
-        if(cnt==0)
+        if(front==-1)
             return -1;
         return arr[front];
     }
     
     int Rear() {
-        if(cnt==0)
+        if(rear==-1)
             return -1;
-        if(rear==0)
-            return arr[size-1];
-        return arr[rear-1];
+        return arr[rear];
     }
     
     bool isEmpty() {
-        if(cnt == 0)
+        if(front == -1)
             return true;
         return false;
     }
     
     bool isFull() {
-        if(cnt==size)
+        if((front == 0 && rear == size-1) || (rear == front-1) )
             return true;
         return false;
     }
