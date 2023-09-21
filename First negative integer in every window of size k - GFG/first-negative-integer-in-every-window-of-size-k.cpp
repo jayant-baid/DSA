@@ -31,6 +31,7 @@ int main() {
 
 vector<long long> printFirstNegativeInteger(long long int arr[],
                                              long long int n, long long int k) {
+    // instead of dequeue, we can use queue also. It works perfectly fine 
     deque<  long long > dq;
     vector<long long>ans;
     
