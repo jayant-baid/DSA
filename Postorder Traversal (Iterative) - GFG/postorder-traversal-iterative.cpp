@@ -97,14 +97,16 @@ struct Node {
 class Solution{
     public:
     vector<int> postOrder(Node* root) {
-        stack<Node*>s1, s2;
+        // stack<Node*>s1, s2;
+        stack<Node*>s1;
         vector<int> ans;
         s1.push(root);
         
         while(!s1.empty()){
             Node* temp=s1.top();
             s1.pop();
-            s2.push(temp);
+            // s2.push(temp);
+            ans.push_back(temp->data);
             
             if(temp->left)
                 s1.push(temp->left);
@@ -112,10 +114,11 @@ class Solution{
                 s1.push(temp->right);
         }
         
-        while(!s2.empty()){
-            ans.push_back(s2.top()->data);
-            s2.pop();
-        }
+        // while(!s2.empty()){
+        //     ans.push_back(s2.top()->data);
+        //     s2.pop();
+        // }
+        reverse(ans.begin(), ans.end());
         return ans;
         
     }
