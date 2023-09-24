@@ -128,32 +128,25 @@ struct Node
  */
 
 //Function to return a list containing elements of left view of the binary tree.
+
+void solve(Node* root, int level, vector<int>& ans){
+    if(root == NULL)
+        return;
+        
+    if(level == ans.size())
+        ans.push_back(root->data);
+        
+    solve(root->left, level+1, ans);
+    solve(root->right, level+1, ans);
+}
 vector<int> leftView(Node *root)
 {
    // Your code here
-        map<int, int> mpp;
-        queue<pair<Node*, int>> q;
-        vector<int> ans;
+    vector<int> ans;
         
-        if(root == NULL)
-            return ans;
-            
-        q.push({root, 0});
-        while(!q.empty()){
-            Node* temp = q.front().first;
-            int level = q.front().second;
-            q.pop();
-            
-            if(mpp.find(level) == mpp.end())
-                mpp[level] = temp->data;
-            
-            if(temp->left)
-                q.push({temp->left, level+1});
-            if(temp->right)
-                q.push({temp->right, level+1});
-        }
-        for(auto it: mpp){
-            ans.push_back(it.second);
-        }
+    if(root == NULL)
         return ans;
+            
+    solve(root, 0, ans);    
+    return ans;
 }
