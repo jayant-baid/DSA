@@ -117,21 +117,25 @@ class Solution{
         while(!q.empty()){
             int size=q.size();
             vector<int> row(size);
-
+            
+            int start=ans.size();
+            
             for(int i=0;i<size;i++){
                 auto temp=q.front();
                 q.pop();
-                int index= left2right ? i : size-1-i;
-                row[index]=temp->data;
+                
+                ans.push_back(temp->data);
+                
                 if(temp->left)
                     q.push(temp->left);
                 if(temp->right)
                     q.push(temp->right);
             }
-            left2right=!left2right;
             
-            for(int i=0;i<size;i++)
-                ans.push_back(row[i]);
+            if(!left2right)
+                reverse(ans.begin() + start, ans.end());
+                
+            left2right=!left2right;
 
         }
         return ans;
