@@ -134,26 +134,33 @@ class Solution {
         
         while(!q.empty()){
             int size=q.size();
-            cnt++;
+            // cnt++;
+            bool flag=false;
             for(int i=0;i<size;i++){
                 Node* temp=q.front();
                 q.pop();
                 
                 if(temp->left && !vis[temp->left]){
+                    flag=true;
                     q.push(temp->left);
                     vis[temp->left]=true;
                 }
                 if(temp->right && !vis[temp->right]){
+                    flag=true;
                     q.push(temp->right);
                     vis[temp->right]=true;
                 }
                 if(parent[temp] && !vis[parent[temp]]){
+                    flag=true;
                     q.push(parent[temp]);
                     vis[parent[temp]]=true;
                 }
             }
+            if(flag==true)
+                cnt++;
         }
-        return cnt-1;
+        // return cnt-1;
+        return cnt;
     }
 };
 
