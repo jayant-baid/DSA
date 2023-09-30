@@ -20,39 +20,32 @@ struct Node
 };
 */
 // your task is to complete this function
-bool solve(Node* root, int node, int& k, int& ans){
-    if(root == NULL)
-        return false;
-       
-    if(root->data == node){
-        k--;
-        return true;
-    }
-        
-    bool left = solve(root->left, node, k, ans);
-    if(left){
-        if(k==0){
-            ans=root->data;
-            return false;
-        }
-        k--;
-        return true;
-    }
-    bool right = solve(root->right, node, k, ans);
-    if(right){
-        if(k==0){
-            ans=root->data;
-            return false;
-        }
-        k--;
-        return true;
-    }
-    // return false;
-}
 int kthAncestor(Node *root, int k, int node)
 {
-    int ans=-1;
-    solve(root, node, k, ans);
- 
-    return ans;
+    unordered_map<int, int> parent;
+    parent[root->data]=-1;
+    queue<Node*> q;
+    q.push(root);
+    
+    while(!q.empty()){
+        Node* temp=q.front();
+        q.pop();
+        
+        if(temp->left){
+            q.push(temp->left);
+            parent[temp->left->data]=temp->data;
+        }
+        if(temp->right){
+            q.push(temp->right);
+            parent[temp->right->data]=temp->data;
+        }
+    }
+    
+    while(k && parent[node]!=-1){
+        node=parent[node];
+        k--;
+        if(k==0)
+            return node;
+    }
+    return -1;
 }
