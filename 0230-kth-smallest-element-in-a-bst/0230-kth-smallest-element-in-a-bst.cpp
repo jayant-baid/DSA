@@ -11,24 +11,39 @@
  */
 class Solution {
 public:
-    int solve(TreeNode* root, int& i, int k){
+    int kthSmallest(TreeNode* root, int k) {
         if(root==NULL)
             return -1;
-        int leftans=solve(root->left, i, k);
-        if(leftans!=-1)
-            return leftans;
-        i++;    
-        if(i == k)
-            return root->val;
 
-        int rightans=solve(root->right, i, k);
-        if(rightans!=-1)
-            return rightans;
+        int cnt=0, ans=-1;
+        
+        TreeNode* curr=root;
+        
+        while(curr){
+            if(curr->left == NULL){
+                cnt++;
+                if(cnt==k)
+                    ans= curr->val;
+                curr=curr->right;
+            }
+            else{
+                TreeNode* prev=curr->left;
+                while(prev->right && prev->right!=curr)
+                    prev=prev->right;
 
-        return -1;
-    }
-    int kthSmallest(TreeNode* root, int k) {
-        int i=0;
-        return solve(root, i, k);
+                if(prev->right == NULL){
+                    prev->right=curr;
+                    curr=curr->left;
+                }
+                else{
+                    cnt++;
+                    if(cnt==k)
+                        ans = curr->val;
+                    prev->right=NULL;
+                    curr=curr->right;
+                }
+            }
+        }
+        return ans;
     }
 };
